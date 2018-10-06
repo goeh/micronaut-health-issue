@@ -40,3 +40,19 @@ All services are UP again
 But Eureka still reports HELLO as DOWN
 
 I waited 5 minutes but HELLO never was reported UP by Eureka but all health checks reports UP.
+
+It looks like Micronaut send .../status?value=DOWN to Eureka when the service is down. But when it's back up again Micronaut does not send .../status?value=UP
+
+
+**DOWN**
+```
+hello_1          | 10:33:12.288 [nioEventLoopGroup-1-7] DEBUG i.m.http.client.DefaultHttpClient - Sending HTTP Request: PUT /eureka/apps/hello/hello%3A8082/status?value=DOWN
+hello_1          | 10:33:12.289 [nioEventLoopGroup-1-7] DEBUG i.m.http.client.DefaultHttpClient - Chosen Server: eureka(8761)
+eureka_1         | 2018-10-06 10:33:12.291  INFO 1 --- [nio-8761-exec-7] c.n.eureka.resources.InstanceResource    : Status updated: HELLO - hello:8082 - DOWN
+eureka_1         | 2018-10-06 10:33:12.805  INFO 1 --- [nio-8761-exec-6] c.n.eureka.resources.InstanceResource    : Status updated: HELLO - hello:8082 - DOWN
+```
+
+**UP**
+```
+hello_1          | 10:37:12.061 [nioEventLoopGroup-1-7] DEBUG i.m.http.client.DefaultHttpClient - Sending HTTP Request: PUT /eureka/apps/hello/hello%3A8082
+```
