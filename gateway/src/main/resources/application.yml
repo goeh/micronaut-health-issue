@@ -1,0 +1,41 @@
+server:
+  port: 9000
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: false
+    serviceUrl:
+      defaultZone: http://${EUREKA_HOST:localhost}:8761/eureka/
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+      - id: notifications
+        uri: lb://notifications
+        predicates:
+        - Path=/v1/notifications/**
+        filters:
+        - StripPrefix=2
+        - AddRequestHeader=x-forwarded-prefix, /v1/notifications
+
+      - id: hello
+        uri: lb://hello
+        predicates:
+        - Path=/v1/hello/**
+        filters:
+        - StripPrefix=2
+        - AddRequestHeader=x-forwarded-prefix, /v1/hello
+
+      - id: websocket
+        uri: lb:ws://notifications
+        predicates:
+        - Path=/ws/notifications
+
+      - id: web_client
+        uri: http://192.168.1.56:8080
+        predicates:
+        - Path=/**

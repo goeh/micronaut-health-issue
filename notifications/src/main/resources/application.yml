@@ -1,0 +1,33 @@
+micronaut:
+  application:
+    name: notifications
+  server:
+    port: 8081
+
+  health:
+    monitor:
+      enabled: true
+      interval: 15s
+      initial-delay: 30s
+
+endpoints:
+  health:
+    enabled: true
+    sensitive: false
+    details-visible: ANONYMOUS
+
+eureka:
+  client:
+    registration:
+      enabled: true
+      fail-fast: false
+      retryCount: 10
+      retryDelay: 5s
+    defaultZone: "${EUREKA_HOST:localhost}:${EUREKA_PORT:8761}"
+
+kafka:
+  bootstrap:
+    servers: kafka:9092
+
+mongodb:
+  uri: mongodb://mongo:27017/notifications

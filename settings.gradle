@@ -1,0 +1,3 @@
+rootProject.name = 'websocket'
+
+include 'eureka', 'gateway', 'notifications', 'hello'
