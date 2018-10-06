@@ -9,6 +9,8 @@ Check Eureka status http://localhost:8761/
 
 Services HELLO and NOTIFICATIONS should be UP.
 
+Check the health endpoint of service hello.
+
 curl http://localhost:8082/health
 
 All services reports UP
@@ -21,23 +23,25 @@ Check health status again
 
 curl http://localhost:8082/health
 
-Check Eureka
+The hello service reports DOWN.
 
 Check Eureka status http://localhost:8761/
 
 The HELLO service is DOWN
 
-Bring the hello service UP again
+Bring the hello service UP again.
 
 curl -X POST http://localhost:8082/UP
 
-Check health status again
+Check health status again.
 
 curl http://localhost:8082/health
 
 All services are UP again
 
 But Eureka still reports HELLO as DOWN
+
+http://localhost:8761/
 
 I waited 5 minutes but HELLO never was reported UP by Eureka but all health checks reports UP.
 
