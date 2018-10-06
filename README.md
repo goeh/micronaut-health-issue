@@ -1,5 +1,7 @@
 # Test project to reproduce Micronaut issue
 
+(this project include Kafka and WebSocket stuff because it's also used to debug another issue)
+
 1. ./gradlew docker
 2. docker-compose up
 
