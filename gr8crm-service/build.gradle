@@ -84,7 +84,7 @@ ADD ${jarName} ${jarName}
 RUN sh -c 'touch /${jarName}'
 ENTRYPOINT ["sh", "-c", "exec java -jar \$JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -Xms64m -Xmx64m /${jarName}"]
         
-EXPOSE 8082
+EXPOSE 8083
 """
 
         exec {

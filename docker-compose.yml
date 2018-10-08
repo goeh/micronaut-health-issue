@@ -82,3 +82,18 @@ services:
       micronaut:
         aliases:
           - HELLO
+  gr8crm-service:
+    image: gr8crm-service:0.1
+    environment:
+      - EUREKA_HOST=eureka
+      - MICRONAUT_SERVER_HOST=gr8crm-service
+    depends_on:
+      - kafka
+      - eureka
+      - gateway
+    ports:
+      - "8083:8083"
+    networks:
+      micronaut:
+        aliases:
+          - GR8CRM-SERVICE
